@@ -33,17 +33,3 @@ public class ReflectionMain {
         return second;
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
