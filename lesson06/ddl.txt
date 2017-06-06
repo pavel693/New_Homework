@@ -1,0 +1,77 @@
+create table `group`
+(
+	id int auto_increment
+		primary key,
+	name varchar(20) null
+)
+;
+
+create table marks
+(
+	id int auto_increment
+		primary key,
+	student_id int null,
+	subject_id int null,
+	mark int null
+)
+;
+
+create index student_id
+	on marks (student_id)
+;
+
+create index subject_id
+	on marks (subject_id)
+;
+
+create table students
+(
+	id int auto_increment
+		primary key,
+	name varchar(10) null,
+	surname varchar(20) null,
+	age int null,
+	group_id int null,
+	constraint students_ibfk_1
+		foreign key (group_id) references students.`group` (id)
+)
+;
+
+create index university_id
+	on students (group_id)
+;
+
+alter table marks
+	add constraint marks_ibfk_1
+		foreign key (student_id) references students.students (id)
+;
+
+create table subjects
+(
+	id int auto_increment
+		primary key,
+	name varchar(10) null
+)
+;
+
+alter table marks
+	add constraint marks_ibfk_2
+		foreign key (subject_id) references students.subjects (id)
+;
+
+create table teachers
+(
+	id int auto_increment
+		primary key,
+	name varchar(20) null,
+	surname varchar(20) null,
+	subject_id int null,
+	constraint teachers_ibfk_2
+		foreign key (subject_id) references students.subjects (id)
+)
+;
+
+create index subject_id
+	on teachers (subject_id)
+;
+
