@@ -60,15 +60,15 @@ public class UserController {
     @RequestMapping(value = "/", method = RequestMethod.POST)
     public
     @ResponseBody
-    User create(@RequestBody User user) {
+    User create(@RequestBody User user) throws CustomException {
         if (userModel.checkUserForEmptyFields(user)) {
-            return null;
+            throw new CustomException("Fields shouldn't be clear");
         }
         if (!userModel.checkUserAge(user)) {
-            return null;
+            throw new CustomException("Age can't be less than 1 and bigger than 100");
         }
         if (userModel.checkUserForDuplicate(user)) {
-            return null;
+            throw new CustomException("This user has been already created, you should use another data");
         }
         userRepository.saveAndFlush(user);
         return user;

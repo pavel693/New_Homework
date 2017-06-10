@@ -20,7 +20,7 @@ public class UserModel {
     public boolean checkUserForDuplicate(User newUser) {
         List<User> userList = userRepository.findAll();
         for (User user : userList) {
-            if (user.equals(newUser)) {
+            if (user.customEquals(newUser)) {
                 return true;
             }
         }
@@ -28,6 +28,6 @@ public class UserModel {
     }
 
     public boolean checkUserForEmptyFields(User newUser) {
-        return newUser.getName().equals("") || newUser.getAge().equals("");
+        return newUser.getName().equals("") || newUser.getAge().equals("") || newUser.getEmail().equals("");
     }
 }

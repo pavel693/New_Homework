@@ -3,7 +3,8 @@ window.User = Backbone.Model.extend({
     defaults: {
         "id": null,
         "name": "",
-        "age": ""
+        "age": "",
+        "email": ""
     }
 });
 
@@ -82,6 +83,7 @@ window.UserView = Backbone.View.extend({
         this.model.set({
             name: $('#name').val(),
             age: $('#age').val(),
+            email: $('#email').val(),
         });
         if (this.model.isNew()) {
             var self = this;

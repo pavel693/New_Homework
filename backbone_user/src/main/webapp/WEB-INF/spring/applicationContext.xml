@@ -37,7 +37,7 @@
 
     <beans:bean id="jpaVendorAdapter"
                 class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter">
-        <beans:property name="showSql" value="false"/>
+        <beans:property name="showSql" value="true"/>
         <beans:property name="database" value="H2"/>
     </beans:bean>
 
@@ -47,6 +47,16 @@
         <beans:property name="persistenceUnitName" value="persistenceUnit"/>
         <beans:property name="dataSource" ref="dataSource"/>
         <beans:property name="jpaVendorAdapter" ref="jpaVendorAdapter"/>
+    </beans:bean>
+
+    <beans:bean
+            class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">
+        <beans:property name="exceptionMappings">
+            <beans:map>
+                <beans:entry key="com.backbone.user.test.controller.CustomException" value="/exception/customException" />
+            </beans:map>
+        </beans:property>
+        <beans:property name="defaultErrorView" value="/exception/defaultException" />
     </beans:bean>
 
     <jpa:repositories base-package="com.backbone.user.test.repository"/>
